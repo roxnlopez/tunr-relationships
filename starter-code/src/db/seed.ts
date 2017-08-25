@@ -1,15 +1,22 @@
 import { db } from '../models';
 let DB = db.models;
 
-var artistCreate = function() {
-	return DB.Artist.create({
-    name: 'Luciano Pavarotti',
-    photoUrl: 'http://img.informador.com.mx/biblioteca/imagen/677x508/811/810055.jpg',
-    nationality: 'Italiano',
-    instrument: 'Voice',
-    home_address: '1 Strada Roma'
-  });
-};
+var lucySongs = [
+	{
+		title: "O sole mio",
+		duration: "3:21",
+		date_of_release: "1990",
+		album_title: "Three Tenors in Concert",
+		artistId: ""
+	},
+	{
+		title: "Nessun dorma",
+		duration: "3:21",
+		date_of_release: "1990",
+		album_title: "Three Tenors in Concert",
+		artistId: ""
+	}
+];
 
 var managerCreate = function() {
 	return DB.Manager.create({
@@ -17,6 +24,26 @@ var managerCreate = function() {
     email: 'rbobby@gmail.com',
     office_number: '516-877-0304',
     cell_phone_number: '718-989-1231'
+	})
+	.then(artistCreate());
+	.then(function(manager) {
+		artist.managerId = manager.id;
+	})
+};
+
+var artistCreate = function() {
+	return DB.Artist.create({
+    name: 'Luciano Pavarotti',
+    photoUrl: 'http://img.informador.com.mx/biblioteca/imagen/677x508/811/810055.jpg',
+    nationality: 'Italiano',
+    instrument: 'Voice',
+    home_address: '1 Strada Roma',
+  })
+	.then(function(artist) {
+		lucySongs.forEach(function(song) {
+			song.artistId = artist.id;
+		});
+		DB.Song.bulkCreate(lucySongs);
 	});
 };
 
@@ -29,8 +56,8 @@ var songCreate = function() {
 	});
 };
 
-artistCreate()
-.then(managerCreate)
+// artistCreate()
+managerCreate()
 .then(songCreate)
 .then(function() {
 	process.exit();

@@ -1,0 +1,20 @@
+{
+  "name": "tunr-relationships",
+  "version": "1.0.0",
+  "description": "<!-- Creator: JP Barela / Zeb Girouard Market: Denver -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roxnlopez/tunr-relationships.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roxnlopez/tunr-relationships/issues"
+  },
+  "homepage": "https://github.com/roxnlopez/tunr-relationships#readme"
+}
