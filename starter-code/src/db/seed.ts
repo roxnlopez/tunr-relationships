@@ -25,25 +25,26 @@ var managerCreate = function() {
     office_number: '516-877-0304',
     cell_phone_number: '718-989-1231'
 	})
-	.then(artistCreate());
 	.then(function(manager) {
-		artist.managerId = manager.id;
+		console.log(manager.id);
+		artistCreate(manager);
 	})
 };
 
-var artistCreate = function() {
+var artistCreate = function(manager) {
 	return DB.Artist.create({
     name: 'Luciano Pavarotti',
     photoUrl: 'http://img.informador.com.mx/biblioteca/imagen/677x508/811/810055.jpg',
     nationality: 'Italiano',
     instrument: 'Voice',
     home_address: '1 Strada Roma',
+    managerId: manager.id
   })
 	.then(function(artist) {
 		lucySongs.forEach(function(song) {
 			song.artistId = artist.id;
 		});
-		DB.Song.bulkCreate(lucySongs);
+	DB.Song.bulkCreate(lucySongs);
 	});
 };
 
